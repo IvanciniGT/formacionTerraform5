@@ -1,7 +1,7 @@
 nombre_contenedor    = "minginx"
 repo_imagen          = "nginx"
 tag_imagen           = "latest"
-cuota_cpu            = 1024
+cuota_cpu            = 2048
 variables_entorno =  [
                             {
                                 "clave" = "VAR1"

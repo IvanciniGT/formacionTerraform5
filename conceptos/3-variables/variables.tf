@@ -8,6 +8,8 @@ variable "nombre_contenedor" {
                        # Indica si se le puede asignar un valor null
                        # Si no le pongo valor, se considera que tiene valor null? NOMBRE
                        # No es lo mismo una variable desasignada que asignada a null
+
+
 }
 
 # Imagen
@@ -41,6 +43,14 @@ variable "cuota_cpu" {
                        # Indica si se le puede asignar un valor null
                        # Si no le pongo valor, se considera que tiene valor null? NOMBRE
                        # No es lo mismo una variable desasignada que asignada a null
+    validation {
+        condition = var.cuota_cpu > 0 # Expresion lógica que si true, indica que el valor es bueno
+        error_message = "El valor de cuota de cpu debe ser mayor que cero" # Que se muestra si el valor no es bueno
+    }        
+    validation {
+        condition = var.cuota_cpu <= 2048 # Expresion lógica que si true, indica que el valor es bueno
+        error_message = "El valor de cuota de cpu debe ser menor o igual a 2048" # Que se muestra si el valor no es bueno
+    }                       
 }
 
 # Puertos
@@ -91,7 +101,25 @@ variable "puertos_a_exponer" {
                        # Indica si se le puede asignar un valor null
                        # Si no le pongo valor, se considera que tiene valor null? NOMBRE
                        # No es lo mismo una variable desasignada que asignada a null
+
+    validation {
+        condition = alltrue(
+                        [ for puerto in var.puertos_a_exponer: puerto.interno < 65000 ] #list(bool)
+                    ) 
+        error_message = "El puerto interno debe ser menor que 65000"
+    }     
+    
+    validation {
+        condition = alltrue(
+                        [ for puerto in var.puertos_a_exponer: puerto.externo < 65000 ] #list(bool)
+                    ) 
+        error_message = "El puerto externo debe ser menor que 65000"
+    }     
+    
 }
+
+
+
 
 variable "variables_entorno" {
     description = "Variables de entorno del contenedor"
