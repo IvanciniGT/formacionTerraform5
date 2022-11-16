@@ -36,17 +36,15 @@ variable "contenedores_a_crear_mas_personalizados" {
         variables_entorno = set(string)
     }))
     description = "Contenedores a crear"
-    default = {
-                "contenedor_P1" = {
-                                    puerto_interno = 80
-                                    puerto_externo = 9980
-                                    variables_entorno = []
-                                }
-                "contenedor_P2" = {
-                                    puerto_interno = 443
-                                    puerto_externo = 9989
-                                    variables_entorno = ["VARIABLE1=VALOR1"]
-                                }
-               }  
+    nullable = false
+}
+variable "contenedores_a_crear_mas_personalizados_2" {
+    type = list(object({
+        nombre              = string
+        puerto_interno      = number
+        puerto_externo      = number
+        variables_entorno   = set(string)
+    }))
+    description = "Contenedores a crear"
     nullable = false
 }
