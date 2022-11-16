@@ -98,34 +98,6 @@ resource "docker_container" "contenedores_mas_personalizados_2" {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 resource "docker_image" "imagen" {
     name = "nginx:latest"  
 }

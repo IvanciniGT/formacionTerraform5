@@ -99,4 +99,40 @@ IP.   ^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]?|0)\.){3}(25[0-5]|2[0-4][0-9
     "contenedorB": "172.17.0.7"
 }
 
+# Proveedor         Provider
+# Aprovisionador    Provisioner
 
+En terraform existen 3 tipos de Aprovisionadores
+
+Todos ellos se usan / definen dentro de un resoruce
+local_exec:     Ejecutar un programa dentro del entorno donde estoy ejecutando el script
+remote_exec:    Ejecutar un programa dentro del resource en el que está definido
+file:           Copiar o crear archivos/carpetas dentro del resource en el que está definido
+
+Los provisionadores, por defecto, se ejecutan cuando un resource es creado/modificado
+Puedo alternativamente configurarlos para que se ejecuten cuando el resource es destruido
+
+Quien querriamos que instalase paquetes, crease usuarios, etc. en un servidor nuevo?
+    Ansible
+    Puppet
+    Chef
+    ---------
+    Script sh
+    Script ps1
+    
+Quien queremos que llame a esos programas? 
+    Terraform? NO, ni de coña... por qué? SISTEMA CON ALTO ACOPLAMIENTO
+    Servidor de automatización: PIPELINE
+    
+Acabo de crear un servidor con terraform.
+    Querría ejecutar yo algo desde terraform dentro de la máquina? remote_exec  
+        Puede ser. Qué? 
+            Ansible: Python, credenciales
+            Puppet:  Instalar el agente de puppet
+El planchado lo haré con Ansible.
+
+
+Voy de borrar un servidor con terraform.
+    Querría ejecutar yo algo desde terraform dentro de la máquina? remote_exec  
+        Puede ser. Qué? 
+            Backup del volumen
