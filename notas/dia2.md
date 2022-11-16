@@ -12,7 +12,7 @@ En esos fichero .tf definimos:
 - data    J
 - modules J/V
 
-#  Cliclo de vida
+#  Ciclo de vida
 
 A Los scripts de terraform, les podemos aplicar distintos comandos:
 - terraform init                    Descargar los proveedores

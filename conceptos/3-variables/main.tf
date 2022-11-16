@@ -28,7 +28,12 @@ resource "docker_container" "contenedor" {
     image       = docker_image.imagen.image_id
                   # Variable          # Propiedad de esa variable
     #start       = false
+    
     cpu_shares  = var.cuota_cpu # Le dejo usar el equivalente a un core.
+                  # Y si no quiero limitarle la cpu ? 
+    # Cuando en terraform, a una propiedad de un recurso le asignamos valor null
+    # Es como si no hubiera escrito la propiedad
+                  
     # Espera un set(string)
     env         = [ for variable in var.variables_entorno: "${variable.clave}=${variable.valor}" ]
                     # bucles en linea de python
@@ -50,6 +55,7 @@ resource "docker_container" "contenedor" {
         content {
                     internal = puerto.value["interno"]
                     external = puerto.value["externo"]
+                    ip       = puerto.value["ip"]
                 }
     }
     # Quiero también el puerto 8443 -> 443

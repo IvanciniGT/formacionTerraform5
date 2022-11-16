@@ -8,8 +8,10 @@ variable "nombre_contenedor" {
                        # Indica si se le puede asignar un valor null
                        # Si no le pongo valor, se considera que tiene valor null? NOMBRE
                        # No es lo mismo una variable desasignada que asignada a null
-
-
+    validation {
+        condition     = length(regexall("^[a-z][a-z0-9]{5,20}$", var.nombre_contenedor))==1
+        error_message = "El nombre de contenedor no es válido"
+    }
 }
 
 # Imagen
@@ -39,16 +41,18 @@ variable "cuota_cpu" {
     type        = number # string | bool | number | list() | set() | object() | map () | any
     #default     = "" # En los scripts... RARO ! NUNCA !
                      # Más adelante, cuando veamos los módulos, veremos que ahí si
-    nullable    = false # true
+    nullable    = true
                        # Indica si se le puede asignar un valor null
                        # Si no le pongo valor, se considera que tiene valor null? NOMBRE
                        # No es lo mismo una variable desasignada que asignada a null
     validation {
-        condition = var.cuota_cpu > 0 # Expresion lógica que si true, indica que el valor es bueno
+                    # Condicional en linea, operador ternario 
+                    # condicion ? valor si true : valor si false
+        condition = var.cuota_cpu == null ? true : var.cuota_cpu > 0 # Expresion lógica que si true, indica que el valor es bueno
         error_message = "El valor de cuota de cpu debe ser mayor que cero" # Que se muestra si el valor no es bueno
     }        
     validation {
-        condition = var.cuota_cpu <= 2048 # Expresion lógica que si true, indica que el valor es bueno
+        condition = var.cuota_cpu == null ? true : var.cuota_cpu <= 2048 # Expresion lógica que si true, indica que el valor es bueno
         error_message = "El valor de cuota de cpu debe ser menor o igual a 2048" # Que se muestra si el valor no es bueno
     }                       
 }
@@ -96,6 +100,7 @@ variable "puertos_a_exponer" {
     type        = list(object({
                     interno = number
                     externo = number
+                    ip      = optional(string, "0.0.0.0")
                   }))
     nullable    = false # true
                        # Indica si se le puede asignar un valor null
@@ -116,6 +121,16 @@ variable "puertos_a_exponer" {
         error_message = "El puerto externo debe ser menor que 65000"
     }     
     
+    validation {
+        condition = alltrue(
+                        [ for puerto in var.puertos_a_exponer: 
+                            length(regexall("^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]?|0)[.]){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]?|0)$", puerto.ip))==1
+                        ] #list(bool)
+                    ) 
+        error_message = "La IP no es válida"
+    }     
+    
+    # Expresiones regulares! 
 }
 
 
