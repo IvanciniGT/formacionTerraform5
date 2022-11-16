@@ -51,6 +51,7 @@ resource "docker_container" "contenedor" {
     # Más adelante habrá otras cosas que queramos montar en bucle
     dynamic "ports"{
         for_each = var.puertos_a_exponer
+                   # Un for_each en un dynamic recibe una lista
         iterator = puerto
         content {
                     internal = puerto.value["interno"]

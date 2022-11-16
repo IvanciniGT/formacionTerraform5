@@ -86,3 +86,17 @@ IP.   ^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]?|0)\.){3}(25[0-5]|2[0-4][0-9
 
 # Quiero un output, con las ips de los contenedores
 # Y otro con la ip del balanceador
+
+
+
+[
+  "contenedor1: 172.17.0.6",
+  "contenedorB: 172.17.0.7",
+]
+
+{
+    "contenedor1": "172.17.0.6",
+    "contenedorB": "172.17.0.7"
+}
+
+
