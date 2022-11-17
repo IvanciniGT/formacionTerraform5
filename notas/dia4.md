@@ -43,7 +43,13 @@ Acciones que puedo ejecutar durante :
 - file              Nos permite copiar o crear archivos en el recurso en 
                     el que está definido
 
+# Cuantas veces se ejecuta un provisionador? 
 
+Tantas como recursos se entén creando dentro de un bloque resource: 
+- count
+- for_each
+
+Y si no hay count ni for_each: 1
 
 
 
