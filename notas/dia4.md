@@ -56,6 +56,25 @@ Y si no hay count ni for_each: 1
 
 
 
+# Modulos
+
+Script python, bash, ps1
+
+El script irá en su lenguaje... normalmente usando un paradigma imperativo en la mayor parte....
+
+Rutinas, Metodos, Funciones, Procedimiento, MODULOS
+    Cuando la llamo, envirle argumentos, parámetros, variables
+    Y cuando la funcion acaba puede que devuelva algo... (return) .... outputs
+
+Un modulo no es sino:
+Un conjunto de recursos (con sus provisionadores), outputs, variables, datas, proveedores (sin su configuración); reutilizable
+
+Qué es un script de terraform ?
+Un conjunto de recursos (con sus provisionadores), outputs, variables, datas, proveedores (+ con su configuración)
+
+Script:
+    ->  Modulos
+                -> Recursos
 
 
 
@@ -67,12 +86,31 @@ Y si no hay count ni for_each: 1
 
 
 
+def doblar(numero=1):
+    # Validar el valor que entra en numero
+    return numero*2
+
+
+
+
+numeros=os.env["numeros"]
+# validar el valor de numero
+for item in numeros:
+    doblar(numero=item)
 
 
 
 
 
+Maquina AWS
 
-
+Elegir la imagen ... Parto la burra !!!
+Instancia
+Tipo
+Credenciales
+Volumenes
+SecurityGroup
+...
+...
 
 
