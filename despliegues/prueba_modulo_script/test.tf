@@ -11,7 +11,9 @@ provider "tls" {
 }
 
 module "claves_prueba" {
-    modulo_claves_tls   = {
+    source              ="../modulo_claves_tls"
+    
+    algoritmo           = {
                             nombre        = "RSA"
                             configuracion = "2048"
                           }
