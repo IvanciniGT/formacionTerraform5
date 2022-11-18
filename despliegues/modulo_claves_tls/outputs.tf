@@ -1,3 +1,20 @@
-output "direccion_ip" {
-    value = docker_container.contenedor.network_data[0].ip_address
+
+output "privateKey" {
+    value = length( tls_private_key.claves ) == 1 ? {
+                    pem      = tls_private_key.claves[0].private_key_pem
+                    open_ssh = tls_private_key.claves[0].private_key_openssh
+                } : {
+                    pem      = locals.contendo_fichero_clave_privada_pem
+                    open_ssh = locals.contendo_fichero_clave_privada_open_ssh
+                }
+}
+
+output "publicKey" {
+    value = length( tls_private_key.claves ) == 1 ? {
+                    pem      = tls_private_key.claves[0].public_key_pem
+                    open_ssh = tls_private_key.claves[0].public_key_openssh
+                } : {
+                    pem      = locals.contendo_fichero_clave_publica_pem
+                    open_ssh = locals.contendo_fichero_clave_publica_open_ssh
+                }
 }

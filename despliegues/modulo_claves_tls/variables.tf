@@ -34,8 +34,20 @@ variable "algoritmo" {
     }
 }
 
-variable "fore_recreate" {
+variable "force_recreate" {
     description = "Regenerar claves incluso si existen"
     type        = bool
     nullable    = false 
     default     = true
+}
+
+variable "file_destination" {
+    description = "Directorio donde generar los ficheros"
+    type        = string 
+    nullable    = false
+    default     = "."
+    validation {
+        condition     = length(regexall("^[.]?[\\/]?([a-zA-Z0-9_-]+[\\/]?)*$", var.file_destination))==1
+        error_message = "El directorio no es válido"
+    }
+}
