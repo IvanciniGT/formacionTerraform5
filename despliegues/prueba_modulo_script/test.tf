@@ -19,7 +19,12 @@ module "claves_prueba" {
                           }
                     
 
-    force_recreate      = true
+    force_recreate      = false
 
     file_destination    = "claves"
+}
+
+output "privada" {
+    value = module.claves_prueba.privateKey
+    sensitive = true
 }
